@@ -14,6 +14,8 @@ import com.project.quadroPresenca.quadroPresenca.services.PostoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/posto")
 public class PostoController {
@@ -31,8 +33,15 @@ public class PostoController {
 	
 	@Operation(summary = "Serviço para listar de postos.")
 	@GetMapping("listar-postos")
-	public void listar() {
-		// TODO Auto-generated method stub
+	public ResponseEntity<List<PostoResponseDto>> listarPostos() {
+
+		try {
+			var response = postoservice.listarPostos();
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(500).build(); // Retorna erro 500 em caso de exceção
+		}
 	}
 	
 }

@@ -35,7 +35,9 @@ public class OficialCivil {
 	
 	@Column(name = "antiguidade", length = 10, nullable = false)
 	private Integer antiguidade;
-	
+
+	@Column(name = "presenca", nullable = false)
+	private Boolean presenca;
 	
 	@ManyToOne //muitos oficiais/civis para 1 posto
 	@JoinColumn(name = "posto_id", nullable = false)

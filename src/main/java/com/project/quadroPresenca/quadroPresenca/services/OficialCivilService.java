@@ -1,10 +1,9 @@
 package com.project.quadroPresenca.quadroPresenca.services;
 
 
-import org.apache.catalina.mapper.Mapper;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -117,8 +116,24 @@ public class OficialCivilService {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-	
 
+	}
+
+	public OficialCivilResponseDto  presenca( Integer id) {
+
+		OficialCivil oficialCivil = oficialCivilRepository.findById(id).orElse(null);
+		var presenca = oficialCivil.getPresenca();
+
+		if (presenca == false) {
+				oficialCivil.setPresenca(true);
+				oficialCivilRepository.save(oficialCivil);
+				return mapper.map(oficialCivil, OficialCivilResponseDto.class);
+		} else if (presenca == true) {
+				oficialCivil.setPresenca(false);
+				oficialCivilRepository.save(oficialCivil);
+				return mapper.map(oficialCivil, OficialCivilResponseDto.class);
+			} else {
+				return null;
+			}
+		}
 }

@@ -73,3 +73,8 @@ CREATE TRIGGER trigger_check_shift_antiguidade
     BEFORE INSERT ON public.oficial_civil
     FOR EACH ROW
     EXECUTE FUNCTION check_and_shift_antiguidade();
+
+
+
+ALTER TABLE IF EXISTS public.oficial_civil
+    ADD COLUMN presenca BOOLEAN DEFAULT false;
